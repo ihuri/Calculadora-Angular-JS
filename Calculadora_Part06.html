@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="Calculadora">
+<head>
+    <meta charset="utf-8"> 
+	<title>Exemplo 6</title>
+	<!-- Importando o Bootstrap da pasta Lib/Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<!-- Sobre escrevendo o estilo -->
+	<style>
+		.jumbotron {
+				width: 400px;
+				text-align: center;
+				margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+		}
+		.form-control {
+			margin-top: 5px;
+		}
+		.btn {
+			margin-top: 5px;
+		}
+		.space {
+			margin-top: 5px;
+		}
+	</style>
+	<!-- Importando o angularjs do repositorio do google-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+	<!-- Criação do Controler -->
+	<script>
+		angular.module("Calculadora", []);
+		angular.module('Calculadora', []).controller('CalculadoraCtrl', function($scope) {
+  			$scope.app = "Calculadora";
+  			$scope.apagarCalculo = function (calculo){
+  				delete $scope.calculo;
+  			}
+  			$scope.soma = function (a, b){
+				$scope.calculo = a + b;
+  								
+  			}
+  			$scope.sub = function (a, b){
+				$scope.calculo = a - b;
+  								
+  			}
+  			$scope.mult = function (a, b){
+				$scope.calculo = a * b;
+  								
+  			}
+  			$scope.div = function (a, b){
+				$scope.calculo = a / b;
+  								
+  			}
+
+		});
+	</script>
+</head>
+<body ng-controller="CalculadoraCtrl">
+	<div class="jumbotron">
+		<h2>{{app}}</h2>
+		<input class="form-control" type="number" ng-model="a">
+		<select class="form-control" ng-model="operador" ng-click="apagarCalculo(calculo)">
+			<option value="">Selecione um Operador</option>
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		<input class="form-control" type="number" ng-model="b">
+		<!-- Atravez da diretiva ngShow, permite deixar oculto o objeto invisivel caso não seja um resutado em false -->
+		<button class="btn btn-primary btn-block" ng-click="soma(a, b)" ng-show="operador == '+' &&a &&b">Somar</button>
+		<button class="btn btn-primary btn-block" ng-click="sub(a, b)" ng-show="operador == '-' &&a &&b">Subitrair</button>
+		<button class="btn btn-primary btn-block" ng-click="mult(a, b)" ng-show="operador == '*' &&a &&b">Multiplicar</button>
+		<button class="btn btn-primary btn-block" ng-click="div(a, b)" ng-show="operador == '/' &&a &&b">Dividir</button>
+		<div class="space" ng-show="operador != '' &&a &&b">
+			O Resultado de {{a}} {{operador}} {{b}} = {{calculo}}
+		</div>
+		
+
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="Calculadora">
+<head>
+    <meta charset="utf-8"> 
+	<title>Exemplo 2</title>
+	<!-- Importando o Bootstrap da pasta Lib/Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<!-- Sobre escrevendo o estilo -->
+	<style>
+		.jumbotron {
+				width: 400px;
+				text-align: center;
+				margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+		}
+	</style>
+	<!-- Importando o angularjs do repositorio do google-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+	<script>
+		angular.module("Calculadora", []);
+		angular.module('Calculadora', []).controller('CalculadoraCtrl', function($scope) {
+  			$scope.app = "Calculadora"
+			$scope.a = 5;
+  			$scope.b = 7;
+  			$scope.soma = $scope.a + $scope.b;
+		});
+	</script>
+</head>
+<body ng-controller="CalculadoraCtrl">
+	<div class="jumbotron">
+		<h2>{{app}}</h2>
+		A soma de {{a}} + {{b}} = {{soma}}
+
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html ng-app="Calculadora">
+<head>
+    <meta charset="utf-8"> 
+	<title>Exemplo 7</title>
+	<!-- Importando o Bootstrap da pasta Lib/Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<!-- Sobre escrevendo o estilo -->
+	<style>
+		.jumbotron {
+				width: 400px;
+				text-align: center;
+				margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+		}
+		.form-control {
+			margin-top: 5px;
+		}
+		.btn {
+			margin-top: 5px;
+		}
+		.space {
+			margin-top: 5px;
+		}
+	</style>
+	<!-- Importando o angularjs do repositorio do google-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+	<!-- Criação do Controler -->
+	<script>
+		angular.module("Calculadora", []);
+		angular.module('Calculadora', []).controller('CalculadoraCtrl', function($scope) {
+  			$scope.app = "Calculadora";
+  			$scope.apagarCalculo = function (calculo){
+  				delete $scope.calculo;
+  				$scope.number.tamanho = historicos.lengton;
+  			}
+  			$scope.historicos = [
+  				{a: "", operador: "", b: "", calculo: ""},
+  			];
+  			$scope.soma = function (a, b, operador){
+  				$scope.calculo = a + b;
+				$scope.historicos.push({a: a, operador: operador, b: b, calculo: a+b});	
+				$scope.number.tamanho = historicos.lengton;
+				
+  			}
+  			$scope.sub = function (a, b, operador){
+  				$scope.calculo = a - b;
+				$scope.historicos.push({a: a, operador: operador, b: b, calculo: a-b});	
+				$scope.number.tamanho = historicos.lengton;
+				  								
+  			}
+  			$scope.mult = function (a, b, operador){
+  				$scope.calculo = a * b;
+				$scope.historicos.push({a: a, operador: operador, b: b, calculo: a*b});	
+				$scope.number.tamanho = historicos.lengton;
+  								
+  			}
+  			$scope.div = function (a, b, operador){
+  				$scope.calculo = a / b;
+				$scope.historicos.push({a: a, operador: operador, b: b, calculo: a/b});	
+				$scope.number.tamanho = historicos.lengton;
+  								
+  			}
+  			
+
+		});
+	</script>
+</head>
+<body ng-controller="CalculadoraCtrl">
+	<div class="jumbotron">
+		<h2>{{app}}</h2>
+		{{historico}}
+		{{tamanho}}
+		<input class="form-control" type="number" ng-model="a">
+		<select class="form-control" ng-model="operador" ng-click="apagarCalculo(calculo)">
+			<option value="">Selecione um Operador</option>
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		<input class="form-control" type="number" ng-model="b">
+		<!-- Atravez da diretiva ngShow, permite deixar oculto o objeto invisivel caso não seja um resutado em false -->
+		<button class="btn btn-primary btn-block" ng-click="soma(a, b, operador)" ng-show="operador == '+' &&a &&b">Somar</button>
+		<button class="btn btn-primary btn-block" ng-click="sub(a, b, operador)" ng-show="operador == '-' &&a &&b">Subtrair</button>
+		<button class="btn btn-primary btn-block" ng-click="mult(a, b, operador)" ng-show="operador == '*' &&a &&b">Multiplicar</button>
+		<button class="btn btn-primary btn-block" ng-click="div(a, b, operador)" ng-show="operador == '/' &&a &&b">Dividir</button>
+		<div class="space" ng-show="operador != '' &&a &&b">
+			O Resultado de {{a}} {{operador}} {{b}} = {{calculo}}
+		</div>
+		<hr/>
+		<h3>Histórico</h3>
+		<table class="table">
+			<tr>
+				<th>Numero 1</th>
+				<th>Operador</th>
+				<th>Numero 2</th>
+				<th>Resultado</th>
+			</tr>
+			<tr ng-repeat="historico in historicos">
+				<td>{{historico.a}}</td>
+				<td>{{historico.operador}}</td>
+				<td>{{historico.b}}</td>
+				<td>{{historico.calculo}}</td>
+			</tr>
+		</table>
+
+	</div>
+	
+</body>
+</html>

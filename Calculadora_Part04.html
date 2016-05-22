@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="Calculadora">
+<head>
+    <meta charset="utf-8"> 
+	<title>Exemplo 4</title>
+	<!-- Importando o Bootstrap da pasta Lib/Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+	<!-- Sobre escrevendo o estilo -->
+	<style>
+		.jumbotron {
+				width: 400px;
+				text-align: center;
+				margin-top: 20px;
+				margin-left: auto;
+				margin-right: auto;
+		}
+		.form-control {
+			margin-top: 5px;
+		}
+		.btn {
+			margin-top: 5px;
+		}
+	</style>
+	<!-- Importando o angularjs do repositorio do google-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+	<!-- Criação do Controler -->
+	<script>
+		angular.module("Calculadora", []);
+		angular.module('Calculadora', []).controller('CalculadoraCtrl', function($scope) {
+  			$scope.app = "Calculadora";
+  			$scope.soma = function (a, b){
+  				$scope.calculo = a + b;
+  			}
+
+		});
+	</script>
+</head>
+<body ng-controller="CalculadoraCtrl">
+	<div class="jumbotron">
+		<h2>{{app}}</h2>
+		<input class="form-control" type="number" ng-model="a">
+		<input class="form-control" type="number" ng-model="b">
+		<!-- Atravez da diretiva ngClick, só serar realizada a soma apartir que o botão for precionado -->
+		<button class="btn btn-primary btn-block" ng-click="soma(a, b)">Somar</button>
+
+		A soma de {{a}} + {{b}} = {{calculo}}
+
+	</div>
+	
+</body>
+</html>
